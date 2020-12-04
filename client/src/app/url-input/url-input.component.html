@@ -1,0 +1,53 @@
+<section>
+  <div class="form-container">
+    <form class="url-input-form">
+      <mat-form-field class="form-field">
+        <mat-label>URL to be shortened</mat-label>
+        <input
+          type="text"
+          matInput
+          [formControl]="urlFormControl"
+          placeholder="Enter the URl to be shortened"
+        />
+        <mat-error
+          *ngIf="
+            urlFormControl.hasError('pattern') &&
+            !urlFormControl.hasError('required')
+          "
+        >
+          Please enter a valid URl
+        </mat-error>
+        <mat-error *ngIf="urlFormControl.hasError('required')">
+          URl is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        [disabled]="!urlFormControl.valid"
+        (click)="getShortUrl()"
+      >
+        Generate Short URL
+      </button>
+    </form>
+  </div>
+  <div id="shortened-url-container">
+    <mat-spinner
+      color="primary"
+      *ngIf="isLoading"
+      [diameter]="isMobile ? 60 : 100"
+    ></mat-spinner>
+    <mat-card id="short-url"></mat-card>
+    <button
+      mat-flat-button
+      color="basic"
+      type="button"
+      [cdkCopyToClipboard]="shortUrl"
+      (click)="notifyCopy()"
+      *ngIf="shortUrl && !isLoading"
+    >
+      Copy to clipboard
+    </button>
+  </div>
+</section>

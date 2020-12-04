@@ -1,0 +1,6 @@
+client/node_modules
+server/env
+*/__pycache__
+*/*/__pycache__
+*/*/*/__pycache__
+server/src/env_production.py
