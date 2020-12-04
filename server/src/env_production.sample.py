@@ -1,0 +1,5 @@
+db_username = ''
+db_password = ''
+db_name = ''
+collection_name = ''
+db_connection_string = ''
